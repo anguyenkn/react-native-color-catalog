@@ -1,12 +1,17 @@
-import React from 'react';
-import { Image, View, StyleSheet, Dimensions } from 'react-native';
-
-import mochaImage from './assets/mocha.jpg';
+import React, { useState } from 'react';
+import { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
 
 export default function App() {
+  const [backgroundColor, setBackgroundColor] = useState('blue');
+
   return (
-    <View style={styles.page}>
-      <Image style={styles.image} source={mochaImage} />
+    <View style={[styles.page, { backgroundColor }]}>
+      <Text style={styles.button} onPress={() => setBackgroundColor('green')}>
+        Green
+      </Text>
+      <Text style={styles.button} onPress={() => setBackgroundColor('red')}>
+        Red
+      </Text>
     </View>
   );
 }
@@ -14,14 +19,14 @@ export default function App() {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  image: {
-    flex: 1,
-    borderRadius: 35,
-    marginTop: 10,
-    marginBottom: 10,
-    width: Dimensions.get('window').width - 10,
+  button: {
+    color: 'white',
+    fontSize: 30,
+    margin: 10,
+    padding: 10,
   },
 });
