@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Image, View, StyleSheet, Dimensions } from 'react-native';
+
+import mochaImage from './assets/mocha.jpg';
 
 export default function App() {
   return (
     <View style={styles.page}>
-      <Text style={styles.text}>Red</Text>
-      <Text style={(styles.text, styles.selectedText)}>Green</Text>
-      <Text style={styles.text}>Blue</Text>
+      <Image style={styles.image} source={mochaImage} />
     </View>
   );
 }
@@ -14,24 +14,14 @@ export default function App() {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginTop: 40,
-    backgroundColor: '#DDD',
   },
-  text: {
-    textAlign: 'center',
-    fontSize: 22,
-    backgroundColor: 'yellow',
-    margin: 10,
-    padding: 5,
-  },
-  selectedText: {
-    fontSize: 22,
-    backgroundColor: 'red',
-    color: 'yellow',
-    margin: 10,
-    padding: 5,
+  image: {
+    flex: 1,
+    borderRadius: 35,
+    marginTop: 10,
+    marginBottom: 10,
+    width: Dimensions.get('window').width - 10,
   },
 });
