@@ -1,38 +1,37 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  ActivityIndicator,
-  ProgressViewIOS,
-  ProgressBarIOS,
-  Button,
-  Alert,
-  Dimensions,
-  Platform,
-} from 'react-native';
-
-const { height, width } = Dimensions.get('window');
+import { Text, View, StyleSheet } from 'react-native';
 
 export default function App() {
-  const onButtonPress = () => {
-    Alert.alert(`${new Date().toLocaleTimeString()} button press`);
-  };
   return (
-    <View style={{ padding: 50 }}>
-      {Platform.Os === 'ios' && <ProgressViewIOS progress={0.5} />}
-      {Platform.Os === 'android' && (
-        <ProgressBarIOS
-          styleAttr='Horizontal'
-          indeterminate={false}
-          color={'blue'}
-          progress={0.5}
-        />
-      )}
-      <ActivityIndicator size='large' color='#61DBFb' />
-      <Button title='Click me' onPress={onButtonPress} />
-      <Text>OS: {Platform.OS}</Text>
-      <Text>Height: {height}</Text>
-      <Text>Width: {width}</Text>
+    <View style={styles.page}>
+      <Text style={styles.text}>Red</Text>
+      <Text style={(styles.text, styles.selectedText)}>Green</Text>
+      <Text style={styles.text}>Blue</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginTop: 40,
+    backgroundColor: '#DDD',
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 22,
+    backgroundColor: 'yellow',
+    margin: 10,
+    padding: 5,
+  },
+  selectedText: {
+    fontSize: 22,
+    backgroundColor: 'red',
+    color: 'yellow',
+    margin: 10,
+    padding: 5,
+  },
+});
