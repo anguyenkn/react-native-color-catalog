@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
-import { StyleSheet, FlatList, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, FlatList, AsyncStorage } from 'react-native';
 import ColorButton from './components/ColorButton';
 import ColorForm from './components/ColorForm';
 import { generate } from 'shortid';
 
 const useColors = () => {
   const [colors, setColors] = useState([]);
+
+  const loadColors = async () => {
+    const colorData = await AsyncStorage.getItem('@ColorListStore:Colors');
+    if (colorData) {
+      const colors = JSON.parse(colorData);
+      setColors(colors);
+    }
+  };
+
+  useEffect(() => {
+    if (colors.length) return;
+    loadColors();
+  }, []);
+
+  useEffect(() => {
+    AsyncStorage.setItem('@ColorListStore:Colors', JSON.stringify(colors));
+  }, [colors]);
 
   const addColor = (color) => {
     const newColor = { id: generate(), color };
